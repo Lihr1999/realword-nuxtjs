@@ -1,0 +1,43 @@
+[
+  {
+    "path": "/",
+    "component": "F:\\\\网页设计\\\\自学\\\\js\\\\JS深入\\\\模块3 - Vuex 数据流管理及Vue.js 服务端渲染(SSR)\\\\02-服务端渲染\\\\05-Nuxt.js综合案例\\\\realworld-nuxtjs\\\\pages\\\\layout",
+    "children": [
+      {
+        "path": "",
+        "name": "home",
+        "component": "F:\\\\网页设计\\\\自学\\\\js\\\\JS深入\\\\模块3 - Vuex 数据流管理及Vue.js 服务端渲染(SSR)\\\\02-服务端渲染\\\\05-Nuxt.js综合案例\\\\realworld-nuxtjs\\\\pages\\\\home"
+      },
+      {
+        "path": "/login",
+        "name": "login",
+        "component": "F:\\\\网页设计\\\\自学\\\\js\\\\JS深入\\\\模块3 - Vuex 数据流管理及Vue.js 服务端渲染(SSR)\\\\02-服务端渲染\\\\05-Nuxt.js综合案例\\\\realworld-nuxtjs\\\\pages\\\\login"
+      },
+      {
+        "path": "/register",
+        "name": "register",
+        "component": "F:\\\\网页设计\\\\自学\\\\js\\\\JS深入\\\\模块3 - Vuex 数据流管理及Vue.js 服务端渲染(SSR)\\\\02-服务端渲染\\\\05-Nuxt.js综合案例\\\\realworld-nuxtjs\\\\pages\\\\login"
+      },
+      {
+        "path": "/profile/:username",
+        "name": "profile",
+        "component": "F:\\\\网页设计\\\\自学\\\\js\\\\JS深入\\\\模块3 - Vuex 数据流管理及Vue.js 服务端渲染(SSR)\\\\02-服务端渲染\\\\05-Nuxt.js综合案例\\\\realworld-nuxtjs\\\\pages\\\\profile"
+      },
+      {
+        "path": "/settings",
+        "name": "settings",
+        "component": "F:\\\\网页设计\\\\自学\\\\js\\\\JS深入\\\\模块3 - Vuex 数据流管理及Vue.js 服务端渲染(SSR)\\\\02-服务端渲染\\\\05-Nuxt.js综合案例\\\\realworld-nuxtjs\\\\pages\\\\settings"
+      },
+      {
+        "path": "/editor",
+        "name": "editor",
+        "component": "F:\\\\网页设计\\\\自学\\\\js\\\\JS深入\\\\模块3 - Vuex 数据流管理及Vue.js 服务端渲染(SSR)\\\\02-服务端渲染\\\\05-Nuxt.js综合案例\\\\realworld-nuxtjs\\\\pages\\\\editor"
+      },
+      {
+        "path": "/article/:slug",
+        "name": "article",
+        "component": "F:\\\\网页设计\\\\自学\\\\js\\\\JS深入\\\\模块3 - Vuex 数据流管理及Vue.js 服务端渲染(SSR)\\\\02-服务端渲染\\\\05-Nuxt.js综合案例\\\\realworld-nuxtjs\\\\pages\\\\article"
+      }
+    ]
+  }
+]
