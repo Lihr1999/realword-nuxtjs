@@ -6,22 +6,17 @@ on:
       - 'v*'
 jobs:
   build-and-deploy:
-    # runs-on 代表运行环境
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # runs-on 代表运行环境
     steps:
-    # 下载源码
-    - name: Checkout
+    - name: Checkout # 下载源码
     uses: actions/checkout@master
-    # 打包构建
-    - name: Build
+    - name: Build # 打包构建
     uses: actions/setup-node@master
     - run: npm install
     - run: npm run build
-    # tar代表把后面的文件 压缩成release.tgz压缩包
     - run: tar -zcvf release.tgz .nuxt static app.js nuxt.config.js package.json
-    package-lock.json pm2.config.json
-    # 发布 Release
-    - name: Create Release
+    package-lock.json pm2.config.json # tar代表把后面的文件 压缩成release.tgz压缩包
+    - name: Create Release # 发布 Release
     id: create_release
     uses: actions/create-release@master
     env:
@@ -30,27 +25,23 @@ jobs:
     with:
       tag_name: ${{ github.ref }}
       release_name: Release ${{ github.ref }}
-      # 草稿模式
-      draft: false
-      # 预发布模式
-      prerelease: false
-    # 上传构建结果到 Release
-    - name: Upload Release Asset
+      draft: false # 草稿模式
+      prerelease: false # 预发布模式
+    - name: Upload Release Asset # 上传构建结果到 Release
     id: upload-release-asset
     uses: actions/upload-release-asset@master
     env:
       GITHUB_TOKEN: ${{ secrets.TOKEN }}
     with:
-      # 通过上面的发布 Release得到
-      upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls
+      
+      upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls # 通过上面的发布 Release得到
       from the CREATE RELEASE step above, referencing it's ID to get its outputs
       object, which include a `upload_url`. See this blog post for more info:
       https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
     asset_path: ./release.tgz
     asset_name: release.tgz
     asset_content_type: application/x-tgz
-    # 部署到服务器
-    - name: Deploy
+    - name: Deploy # 部署到服务器
     uses: JamesIves/github-pages-deploy-action@v4.2.5
     with: 
       GITHUB_TOKEN: ${{ secrets.TOKEN}}
