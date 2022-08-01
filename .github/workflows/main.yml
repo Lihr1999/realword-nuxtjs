@@ -1,7 +1,6 @@
 name: GitHub Actions Demo
   on:
     push:
-    # 如果以v-开头的 就会触发这个自动部署
       tags:
         - 'v*'
 jobs:
