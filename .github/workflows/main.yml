@@ -1,55 +1,43 @@
 name: GitHub Actions Demo
   on:
     push:
-    # 如果以v-开头的 就会触发这个自动部署
       tags:
         - 'v*'
 jobs:
   build-and-deploy:
-    # runs-on 代表运行环境
     runs-on: ubuntu-latest
     steps:
-    # 下载源码
     - name: Checkout
     uses: actions/checkout@master
-    # 打包构建
     - name: Build
     uses: actions/setup-node@master
     - run: npm install
     - run: npm run build
-    # tar代表把后面的文件 压缩成release.tgz压缩包
     - run: tar -zcvf release.tgz .nuxt static app.js nuxt.config.js package.json
     package-lock.json pm2.config.json
-    # 发布 Release
     - name: Create Release
     id: create_release
     uses: actions/create-release@master
     env:
-      # 
       GITHUB_TOKEN: ${{ secrets.TOKEN }}
     with:
       tag_name: ${{ github.ref }}
       release_name: Release ${{ github.ref }}
-      # 草稿模式
       draft: false
-      # 预发布模式
       prerelease: false
-    # 上传构建结果到 Release
     - name: Upload Release Asset
     id: upload-release-asset
     uses: actions/upload-release-asset@master
     env:
       GITHUB_TOKEN: ${{ secrets.TOKEN }}
     with:
-      # 通过上面的发布 Release得到
-      upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
       from the CREATE RELEASE step above, referencing it's ID to get its outputs
       object, which include a `upload_url`. See this blog post for more info:
       https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
     asset_path: ./release.tgz
     asset_name: release.tgz
     asset_content_type: application/x-tgz
-    # 部署到服务器
     - name: Deploy
     uses: appleboy/ssh-action@master
     with:
@@ -57,12 +45,9 @@ jobs:
       username: ${{ secrets.USERNAME }}
       password: ${{ secrets.PASSWORD }}
       port: ${{ secrets.PORT }}
-      # 在远程服务器中操作步骤
       script: |
       cd /root/pm2-test
       wget https://github.com/lipengzhou/realworld-nuxtjs/releases/latest/download/release.tgz -O release.tgz
       tar zxvf release.tgz
       npm install --production
       pm2 reload pm2.config.json
-    # wget 代表 把上面的：asset_path: ./release.tgz 下载发布包到服务器 
-    # tar zxvf 代表解压发布包
